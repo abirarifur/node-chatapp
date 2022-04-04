@@ -1,6 +1,6 @@
 const {check, validationResult} = require('express-validator')
 const User = require('../../Models/People')
-const {unlink} = requier('fs');
+const {unlink} = require('fs');
 const path = require('path')
 const addUserValidators = [
     check('name').isLength({min: 1})
