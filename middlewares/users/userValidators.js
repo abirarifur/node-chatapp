@@ -44,6 +44,7 @@ const addUserValidators = [
 
 ]
 const addUserValidationHandler = function(req, res, next) {
+    console.log(req);
     const errors = validationResult(req);
     const mappedError = errors.mapped()
     if(Object.keys(mappedError).length == 0){
@@ -57,6 +58,9 @@ const addUserValidationHandler = function(req, res, next) {
                 }
             )
         }
+        res.status(500).json({
+            errors: mappedError
+        })
     }
 }
 

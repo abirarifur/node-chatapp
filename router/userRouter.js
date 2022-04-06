@@ -1,13 +1,15 @@
 const express = require('express')
 const router = express.Router()
 
-const { getUsers } = require('../controller/userController')
+const { getUsers, addUser, removeUser } = require('../controller/userController')
 const decoratorHTML = require('../middlewares/common/decorateHTML')
 const avatarUploader = require('../middlewares/users/avatarUpload')
-const { addUserValidators } = require('../middlewares/users/userValidators')
+const { addUserValidators, addUserValidationHandler } = require('../middlewares/users/userValidators')
 
 router.get('/', decoratorHTML("Users"), getUsers)
 
-router.post('/',avatarUploader, addUserValidators)
+// router.post('/',avatarUploader,  addUser)
+router.post('/',avatarUploader, addUserValidators, addUserValidationHandler, addUser)
+router.delete('/:id', removeUser)
 
 module.exports = router;

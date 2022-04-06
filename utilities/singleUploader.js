@@ -1,8 +1,10 @@
 const multer = require('multer')
+const path = require('path')
 
 function uploader(subfolder_path, allowed_file_type, max_file_size, error_msg){
 
     const  UPLOADS_FOLDER = `${__dirname}/../public/uploads/${subfolder_path}`
+    // console.log(UPLOADS_FOLDER);
 
     const storage = multer.diskStorage({
         destination: (req, file, cb) =>{
@@ -27,7 +29,7 @@ function uploader(subfolder_path, allowed_file_type, max_file_size, error_msg){
             fileSize: max_file_size
         },
         fileFilter: (req, file, cb) => {
-            if(allowed_file_type.include(file.mimetype)){
+            if(allowed_file_type.includes(file.mimetype)){
                 cb(null, true)
             }else{
                 cb(createError(error_msg))
